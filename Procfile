@@ -1,1 +1,1 @@
-web: gunicorn trader_bot.py
+web: python trader_bot.py
