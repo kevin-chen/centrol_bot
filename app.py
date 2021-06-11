@@ -10,7 +10,7 @@ app.config.from_object(config)
 
 @app.route("/")
 def hello_world():
-    return "If you've made it here, know that you are an exceptional being 🤓. See Terms and Privacy @ Centrol.io.  © 2021 Centrol.io"
+    return "If you've made it here, know that you are an exceptional being 🤓. <br>See Terms and Privacy @ Centrol.io. <br><br>© 2021 Centrol.io"
 
 
 if __name__ == "__main__":
