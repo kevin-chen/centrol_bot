@@ -1,0 +1,1 @@
+web: gunicorn trader_bot.py
