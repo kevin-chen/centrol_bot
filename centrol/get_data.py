@@ -9,6 +9,9 @@ def get_latest_stock_price(sym: str):
     f_url = f"https://api.centrol.io/finance/stock/{sym}/quote"
     r = requests.get(f_url)
     if r.status_code == 200:
+        if r.content == b"":
+            return f"D'oh! {sym} Not found"
+
         data = json.loads(r.content)
         percent_change = "{:.3f} %".format(100 * (data["changePercent"]))
         data["percent_change"] = percent_change
@@ -29,8 +32,8 @@ Average 30-day volume: {data["avgTotalVolume"]:,}
 """
         return resp
     else:
-        log.error(f"Faild to get {r.status_code}. {sym}")
-        return ""
+        log.error(f"Failed to get {r.status_code}. {sym}")
+        return "This is embarrassing. We have server issues."
 
 
 def get_latest_crypto_price(sym: str):
@@ -41,12 +44,11 @@ def get_latest_crypto_price(sym: str):
     f_url = f"https://api.centrol.io/finance/crypto/{sym}/quote"
     r = requests.get(f_url)
 
-    if r.content == b"":
-        return f"{sym.upper()[:-3]} Not supported"
-
     if r.status_code == 200:
+        if r.content == b"":
+            return f"{sym.upper()[:-3]} Not supported."
+
         data = json.loads(r.content)
-        print(data)
         p = ("%.5f" % float(data["latestPrice"])).rstrip("0").rstrip(".")
         resp = f"""
 ```yaml
@@ -58,4 +60,4 @@ Price: {p}
         return resp
     else:
         log.error(f"Faild to get {r.status_code}. {sym}")
-        return ""
+        return "This is embarrassing. We have server issues."
