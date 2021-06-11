@@ -23,7 +23,7 @@ class CentrolConfig:
             """
             self.DEBUG = False
             self.URL = "127.0.0.1"
-            self.PORT = 80
+            self.PORT = 8080
 
         else:
             """

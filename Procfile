@@ -1,2 +1,2 @@
-web: python web/centrol_server.py
+web: gunicorn app:app
 worker: python trader_bot.py

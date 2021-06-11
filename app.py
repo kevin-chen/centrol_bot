@@ -14,8 +14,4 @@ def hello_world():
 
 
 if __name__ == "__main__":
-    app.run(
-        host=app.config.get("URL"),
-        port=app.config.get("PORT"),
-        debug=app.config.get("DEBUG"),
-    )
+    app.run(threaded=True, port=5000)
