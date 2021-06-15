@@ -10,7 +10,7 @@ def get_latest_stock_price(sym: str):
     r = requests.get(f_url)
     if r.status_code == 200:
         if r.content == b"":
-            return f"D'oh! {sym} Not found"
+            return f"D'oh! {sym} not found 😱"
 
         data = json.loads(r.content)
         percent_change = "{:.3f} %".format(100 * (data["changePercent"]))
@@ -33,7 +33,7 @@ Average 30-day volume: {data["avgTotalVolume"]:,}
         return resp
     else:
         log.error(f"Failed to get {r.status_code}. {sym}")
-        return "This is embarrassing. We have server issues."
+        return "This is embarrassing. We are having server issues."
 
 
 def get_latest_crypto_price(sym: str):
@@ -46,7 +46,7 @@ def get_latest_crypto_price(sym: str):
 
     if r.status_code == 200:
         if r.content == b"":
-            return f"{sym.upper()[:-3]} Not supported."
+            return f"D'oh! {sym.upper()[:-3]} not found 😯"
 
         data = json.loads(r.content)
         p = ("%.5f" % float(data["latestPrice"])).rstrip("0").rstrip(".")
@@ -60,4 +60,4 @@ Price: {p}
         return resp
     else:
         log.error(f"Faild to get {r.status_code}. {sym}")
-        return "This is embarrassing. We have server issues."
+        return "This is embarrassing. We are having server issues."
