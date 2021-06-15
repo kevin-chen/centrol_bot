@@ -248,7 +248,7 @@ def hello_world():
     </div>
   </section>
   <!-- Slide 1 (#10) -->
-  <section class="slide fade-6 kenBurns" id="f">
+  <section class="slide fade-6 kenBurns" data-name="faq">
     <div class="content">
       <div class="container">
         <div class="wrap">
