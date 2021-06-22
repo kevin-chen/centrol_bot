@@ -3,16 +3,13 @@ import logging
 from enum import Enum
 
 log = logging.getLogger(__name__)
-
-
 class ENV(Enum):
     DEV = "DEV"
     PROD = "PROD"
-
-
+    
 class CentrolConfig:
 
-    log.info("Setting up ..")
+    log.info("Setting up ...")
     env = ENV.PROD if os.getenv("ENV") == "prod" else ENV.DEV
 
     def __init__(self):
