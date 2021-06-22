@@ -43,7 +43,7 @@ def send_reply(message):
         bot.reply_to(message, data)
 
     if message.text.startswith("/c"):
-        sym = "".join(message.text.split("/s")).strip().lower()
+        sym = "".join(message.text.split("/c")).strip().lower()
         data = get_latest_crypto_price(sym)
         bot.reply_to(message, data)
 
