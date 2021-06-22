@@ -20,6 +20,7 @@ multidict==5.1.0
 mypy-extensions==0.4.3
 pathspec==0.8.1
 pyjokes==0.6.0
+pyTelegramBotAPI==3.7.9
 regex==2021.4.4
 requests==2.25.1
 toml==0.10.2
