@@ -36,19 +36,19 @@ If you have any suggestions or feature requests, add them here: https://share.ce
 
 # Decorated message handler - this only accepts one arg: the message.
 @bot.message_handler(func=lambda m: True)
-async def send_reply(message):
+def send_reply(message):
     if message.text.startswith("/s"):
         sym = "".join(message.text.split("/s")).strip().upper()
         data = get_latest_stock_price(sym)
-        await bot.reply_to(message, data)
+        bot.reply_to(message, data)
 
     if message.text.startswith("/c"):
         sym = "".join(message.text.split("/s")).strip().lower()
         data = get_latest_crypto_price(sym)
-        await bot.reply_to(message, data)
+        bot.reply_to(message, data)
 
     if message.text.startswith("/j"):
-        await bot.reply_to(message, pyjokes.get_joke(category="neutral"))
+        bot.reply_to(message, pyjokes.get_joke(category="neutral"))
 
 
 while True:
