@@ -1,6 +1,7 @@
 from centrol.get_data import (
     get_latest_crypto_price,
     get_latest_stock_price,
+    get_latest_iex_stock_price,
 )
 import telebot
 from log import logger
@@ -49,6 +50,12 @@ def send_reply(message):
 
     if message.text.startswith("/j"):
         bot.reply_to(message, pyjokes.get_joke(category="neutral"))
+
+# todo: testing whether this will work and what the latest price is compared to market price
+    if message.text.startswith("/iprice"):
+        sym = "".join(message.text.split("/c")).strip().lower()
+        data = get_latest_iex_stock_price(sym)
+        bot.reply_to(message, data)
 
 
 while True:
