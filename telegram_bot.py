@@ -53,7 +53,7 @@ def send_reply(message):
 
 # todo: testing whether this will work and what the latest price is compared to market price
     if message.text.startswith("/iprice"):
-        sym = "".join(message.text.split("/c")).strip().lower()
+        sym = "".join(message.text.split("/iprice")).strip().lower()
         data = get_latest_iex_stock_price(sym)
         bot.reply_to(message, data)
 
