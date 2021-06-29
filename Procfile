@@ -1,3 +1,3 @@
-web: gunicorn --workers=1 app:app
-discord-worker: python discord_bot.py
-telegram-worker: python telegram_bot.py
+web: gunicorn --workers=1 app:src/app
+discord-worker: python src/discord_bot.py
+telegram-worker: python src/telegram_bot.py
