@@ -16,3 +16,12 @@ By default we provide USD prices. To get data for EUR or GBP, simply add currenc
 *Unfortunately at this time we can only provide price data for crypto tokens, we are looking to provide more data as we grow. *
 
 If you have any suggestions or feature requests, add them here: https://share.centrol.io/e/feedback
+
+
+## To add
+
+### Discord
+https://share.centrol.io/e/discordBot
+
+### Telegram
+https://share.centrol.io/e/telegramBot
