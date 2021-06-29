@@ -21,6 +21,8 @@ If you have any suggestions or feature requests, add them here: https://share.ce
 ## To add
 
 ### Discord
+[![Discord bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_200,g_face/v1623722652/f9bb9c4af2b9c32a2c5ee0014661546d_ouv38k.png)]
+
 https://share.centrol.io/e/discordBot
 
 ### Telegram
