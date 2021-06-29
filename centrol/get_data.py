@@ -61,3 +61,26 @@ Price: {p}
     else:
         log.error(f"Faild to get {r.status_code}. {sym}")
         return "This is embarrassing. We are having server issues."
+
+def get_latest_iex_stock_price(sym: str):
+    f_url = f"https://api.centrol.io/finance/tops/last?symbols={sym}"
+    r = requests.get(f_url)
+    if r.status_code == 200:
+        if r.content == b"":
+            return f"D'oh! {sym} not found 😱"
+
+        data = json.loads(r.content)
+        p = ("%.5f" % float(data["price"])).rstrip("0").rstrip(".")
+        resp = f"""
+```yaml
+{data["symbol"]}
+
+Price: {p}
+
+Volume: {data["size"]}
+```
+"""
+        return resp
+    else:
+        log.error(f"Failed to get {r.status_code}. {sym}")
+        return "This is embarrassing. We are having server issues."

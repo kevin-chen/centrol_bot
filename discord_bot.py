@@ -11,7 +11,6 @@ logger.setup_logger()
 
 client = discord.Client()
 
-
 @client.event
 async def on_ready():
     print("We have logged in as {0.user}".format(client))
@@ -29,22 +28,25 @@ async def on_message(message):
     if message.content.startswith("!help"):
         await message.channel.send(
             f"""
-Thanks for adding a Centrol powered bot!:
-```
-To get stock data:
+Hello from the Centrol Trader Bot 👋
+
+_To get stock data: _
+    ```
     !s -> stock
     !s AAPL
+    ```
 
-To get cryptocurrency data:
+_To get cryptocurrency data: _
+    ```
     !c -> crypto
     !c BTC
+    ```
 
 By default we provide USD prices. To get data for EUR or GBP, simply add currency as a suffix. e.g. !c BTCEUR.
-Unfortunately at this time we can only provide price data for the tokens.
 
-    !j -> You might enjoy these if you are a programmer
-```
-"""
+*Unfortunately at this time we can only provide price data for crypto tokens, we are looking to provide more data as we grow. *
+
+If you have any suggestions or feature requests, add them here: https://share.centrol.io/e/feedback"""
         )
 
     if message.content.startswith("!j"):
