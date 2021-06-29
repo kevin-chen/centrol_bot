@@ -1,37 +1,50 @@
-## Welcome to GitHub Pages
+# Centrol bot for querying Stock and Crypto data
 
-You can use the [editor on GitHub](https://github.com/centrol-io/centrol_bot/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Hello from the Centrol Team 👋
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The bot provides real time info about thousands of stock symbols and various crypto tokens. It is still in development, so please do report any issues and we will get to it ASAP!
 
-### Markdown
+We are currently running on Discord and Telegram! With Reddit coming soon!
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## On Discord
 
-```markdown
-Syntax highlighted code block
+### To get stock data:    
+    !s -> stock
+    !s AAPL
 
-# Header 1
-## Header 2
-### Header 3
+![Discord Stock Example](https://res.cloudinary.com/hiwjbfp34/image/upload/v1624975183/discord_stock_example_tuqtn7.png)
 
-- Bulleted
-- List
+### To get cryptocurrency data:
+    !c -> crypto
+    !c BTC
 
-1. Numbered
-2. List
+![Discord Crypto Example](https://res.cloudinary.com/hiwjbfp34/image/upload/v1624975100/discord_crypto_example_yu32ow.png)
 
-**Bold** and _Italic_ and `Code` text
+By default we provide USD prices. To get data for EUR or GBP, simply add currency as a suffix. e.g. /c BTCEUR.
 
-[Link](url) and ![Image](src)
-```
+*Unfortunately at this time we can only provide price data for crypto tokens, we are looking to provide more data as we grow. *
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## On Telegram
 
-### Jekyll Themes
+### To get stock data:    
+    /s -> stock
+    /s AAPL
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/centrol-io/centrol_bot/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### To get cryptocurrency data:
+    /c -> crypto
+    /c BTC
 
-### Support or Contact
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Invite links for Discord and Telegram!
+
+[![Discord bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_200,g_face/v1623722652/f9bb9c4af2b9c32a2c5ee0014661546d_ouv38k.png)](https://share.centrol.io/e/discordBot)
+
+[![Discord bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_200,g_face/v1624973956/512px-Telegram_logo_t8hv3d.png)](https://share.centrol.io/e/telegramBot)
+
+
+## Feedback
+
+If you have any suggestions or feature requests, add them here: https://share.centrol.io/e/feedback
+
+or contact us directly at:
+founders@centrol.io
