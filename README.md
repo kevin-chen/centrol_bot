@@ -1,4 +1,4 @@
-# Centrol bot for Discord and Telegram
+# Centrol bot for querying Stock and Crypto data
 
 ## Centrol Ticker Bot
 Hello from the Centrol Team 👋
@@ -20,6 +20,7 @@ By default we provide USD prices. To get data for EUR or GBP, simply add currenc
 [![Discord bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_200,g_face/v1623722652/f9bb9c4af2b9c32a2c5ee0014661546d_ouv38k.png)](https://share.centrol.io/e/discordBot)
 
 [![Discord bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_200,g_face/v1624973956/512px-Telegram_logo_t8hv3d.png)](https://share.centrol.io/e/telegramBot)
+
 
 ## Feedback
 
