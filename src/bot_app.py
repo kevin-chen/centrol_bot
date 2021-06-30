@@ -171,13 +171,10 @@ async def hello_world():
     return await render_template("index.html")
 
 
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
-loop.create_task(app.run_task())
+po = 5000 if os.getenv("PORT") is None else int(os.getenv("PORT"))
+
+loop = asyncio.get_event_loop()
+loop.create_task(app.run_task(port=po))
 loop.create_task(tele())
 
 discord_client.run(os.getenv("DISCORD_CLIENT_ID"))
-
-# should be just
-if __name__ == "__main__":
-    app.run()
