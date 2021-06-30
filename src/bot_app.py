@@ -171,7 +171,7 @@ async def hello_world():
     return await render_template("index.html")
 
 
-po = 5000 if os.getenv("PORT") is None else int(os.getenv("PORT"))
+po = 5000 if os.getenv("$PORT") is None else int(os.getenv("$PORT"))
 
 loop = asyncio.get_event_loop()
 loop.create_task(app.run_task(port=po))
