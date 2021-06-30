@@ -1,3 +1,4 @@
 {
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "python.pythonPath": "/Users/abinsaju/.pyenv/versions/3.7.9/envs/discord/bin/python"
 }
