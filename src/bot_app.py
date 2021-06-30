@@ -171,9 +171,8 @@ async def hello_world():
     return await render_template("index.html")
 
 
-if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.create_task(app.run_task())
-    loop.create_task(tele())
+loop = asyncio.get_event_loop()
+loop.create_task(app.run_task())
+loop.create_task(tele())
 
-    discord_client.run(os.getenv("DISCORD_CLIENT_ID"))
+discord_client.run(os.getenv("DISCORD_CLIENT_ID"))
