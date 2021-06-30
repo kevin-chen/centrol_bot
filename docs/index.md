@@ -1,10 +1,21 @@
 # Centrol bot for querying Stock and Crypto data
 
+
+## Invite links for Chat Bots! 
+
+👇 Click the respective logo of the app bot you want 
+
+| Telegram Bot | Discord Bot |
+| --- | --- |
+| [![Telegram bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_60,g_face/v1624973956/512px-Telegram_logo_t8hv3d.png)](https://share.centrol.io/e/telegramBot) | [![Discord bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_75,g_face/v1623722652/f9bb9c4af2b9c32a2c5ee0014661546d_ouv38k.png)](https://share.centrol.io/e/discordBot) |
+
+We are currently running on Discord and Telegram! _With Reddit coming soon!_
+
+------
+
 Hello from the Centrol Team 👋
 
 The bot provides real time info about thousands of stock symbols and various crypto tokens. It is still in development, so please do report any issues and we will get to it ASAP!
-
-We are currently running on Discord and Telegram! With Reddit coming soon!
 
 ## On Discord
 
@@ -33,13 +44,6 @@ By default we provide USD prices. To get data for EUR or GBP, simply add currenc
 ### To get cryptocurrency data:
     /c -> crypto
     /c BTC
-
-
-## Invite links for Discord and Telegram!
-
-[![Discord bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_200,g_face/v1623722652/f9bb9c4af2b9c32a2c5ee0014661546d_ouv38k.png)](https://share.centrol.io/e/discordBot)
-
-[![Discord bot](https://res.cloudinary.com/hiwjbfp34/image/upload/c_thumb,w_200,g_face/v1624973956/512px-Telegram_logo_t8hv3d.png)](https://share.centrol.io/e/telegramBot)
 
 
 ## Feedback
