@@ -5,7 +5,7 @@ import os
 def setup_logger():
     # create logger
     logger = logging.getLogger("")
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
     # create console handler and set level to debug
     ch = logging.StreamHandler()
