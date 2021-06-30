@@ -1,1 +1,1 @@
-web: python app:src/bot_app.py
+web: hypercorn src/bot_app:app
