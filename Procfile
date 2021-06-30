@@ -1,1 +1,1 @@
-web: hypercorn src/bot_app:app
+discord-worker: python src/bot_app.py
