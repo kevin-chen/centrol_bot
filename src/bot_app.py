@@ -19,7 +19,7 @@ config = CentrolConfig()
 app.config.from_object(config)
 
 discord_client = discord.Client()
-tele_bot = Bot(token=os.getenv("TELEGRAM_TOKEN"))
+tele_bot = Bot(token=os.getenv("TELEGRAM_TOKEN"), parse_mode="Markdown") # can set the parse_mode to HTML or Markdown
 tele_dp = Dispatcher(tele_bot)
 
 # @app.before_serving
