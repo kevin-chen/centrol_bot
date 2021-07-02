@@ -74,6 +74,8 @@ If you have any suggestions or feature requests, add them here: https://share.ce
         data = get_latest_crypto_price(sym)
         await message.channel.send(data)
 
+
+# TODO: need to set up url for https://centrol.io/connect_alpaca <-- currently does not exist.
     if message.content.startswith("!buy"):
         sym = "".join(message.content.split("!buy")).strip().lower()
         await message.author.send(
@@ -82,12 +84,12 @@ Hi!
 
 You just tried to buy a stock with the Centrol Trading bot. To process this we need to first connect with an Alpaca account.
 
-1. If you don't have a alpaca account, first create one using the link below.
+1. If you don't have a Alpaca account, first create one using the link below.
 https://alpaca.markets/algotrading
 
 2. You can then either fund your account or using a virtual account (paper trading) to try out the bot!
 
-3. Connect your alpaca account using the below link:
+3. Connect your Alpaca account using the below link:
 https://centrol.io/connect_alpaca
 
 """
