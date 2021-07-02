@@ -17,7 +17,6 @@ def get_latest_stock_price(sym: str):
         data["percent_change"] = percent_change
 
         resp = f"""
-```yaml
 {data["symbol"]} {data["companyName"]}
 
 Price: {data["latestPrice"]} ({data["percent_change"]})
@@ -28,7 +27,6 @@ Previous close: {data["previousClose"]:,}
 Average 30-day volume: {data["avgTotalVolume"]:,}
 52-week High: {data["week52High"]:,}
 52-week Low: {data["week52Low"]:,}
-```
 """
         return resp
     else:
