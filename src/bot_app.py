@@ -19,7 +19,9 @@ config = CentrolConfig()
 app.config.from_object(config)
 
 discord_client = discord.Client()
-tele_bot = Bot(token=os.getenv("TELEGRAM_TOKEN"), parse_mode="Markdown") # can set the parse_mode to HTML or Markdown
+tele_bot = Bot(
+    token=os.getenv("TELEGRAM_TOKEN"), parse_mode="Markdown"
+)  # can set the parse_mode to HTML or Markdown
 tele_dp = Dispatcher(tele_bot)
 
 # @app.before_serving
@@ -74,8 +76,7 @@ If you have any suggestions or feature requests, add them here: https://share.ce
         data = get_latest_crypto_price(sym)
         await message.channel.send(data)
 
-
-# TODO: need to set up url for https://centrol.io/connect_alpaca <-- currently does not exist.
+    # TODO: need to set up url for https://centrol.io/connect_alpaca <-- currently does not exist.
     if message.content.startswith("!buy"):
         sym = "".join(message.content.split("!buy")).strip().lower()
         await message.author.send(
@@ -173,10 +174,10 @@ async def hello_world():
     return await render_template("index.html")
 
 
-po = 5000 if os.getenv("$PORT") is None else int(os.getenv("$PORT"))
+# po = 5000 if os.getenv("$PORT") is None else int(os.getenv("$PORT"))
 
 loop = asyncio.get_event_loop()
-loop.create_task(app.run_task(port=po))
+loop.create_task(app.run_task())
 loop.create_task(tele())
 
 discord_client.run(os.getenv("DISCORD_CLIENT_ID"))
