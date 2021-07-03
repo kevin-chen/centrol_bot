@@ -19,7 +19,7 @@ from hypercorn.config import Config
 
 loop = asyncio.get_event_loop()
 
-app = Quart(__name__, template_folder="web")
+app = Quart(__name__, template_folder="web", static_folder="web", static_url_path="")
 config = CentrolConfig()
 app.config.from_object(config)
 log = logging.getLogger(__name__)
