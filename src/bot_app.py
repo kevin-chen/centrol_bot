@@ -7,6 +7,7 @@ from centrol.get_data import (
     get_latest_stock_price,
 )
 import pyjokes
+import logging
 
 logger.setup_logger()
 import discord
@@ -14,16 +15,19 @@ import os
 import asyncio
 from aiogram import Bot, Dispatcher, types
 
+loop = asyncio.get_event_loop()
+
 app = Quart(__name__, template_folder="web")
 config = CentrolConfig()
 app.config.from_object(config)
+log = logging.getLogger(__name__)
 
 discord_client = discord.Client()
 tele_bot = Bot(
-    token=os.getenv("TELEGRAM_TOKEN"), parse_mode="Markdown"
+    token=os.getenv("TELEGRAM_TOKEN"), parse_mode="MarkdownV2"
 )  # can set the parse_mode to HTML or Markdown
 tele_dp = Dispatcher(tele_bot)
-
+DISC_TOKEN = os.getenv("DISCORD_CLIENT_ID")
 # @app.before_serving
 # async def before_serving():
 #    loop = asyncio.get_event_loop()
@@ -161,9 +165,18 @@ async def send_reply(message):
 async def tele():
     try:
         tele_dp.register_message_handler(start_handler, commands={"start", "restart"})
-        await tele_dp.start_polling()
+        loop.create_task(tele_dp.start_polling())
+        # await tele_dp.start_polling()
     finally:
         await tele_bot.close()
+
+
+async def disc():
+    try:
+        await discord_client.login(DISC_TOKEN)
+        loop.create_task(discord_client.connect())
+    finally:
+        log.warning("stopping")
 
 
 ####
@@ -174,10 +187,8 @@ async def hello_world():
     return await render_template("index.html")
 
 
-# po = 5000 if os.getenv("$PORT") is None else int(os.getenv("$PORT"))
-
-loop = asyncio.get_event_loop()
-loop.create_task(app.run_task())
+# loop.create_task(app.run_task())
 loop.create_task(tele())
+loop.create_task(disc())
 
-discord_client.run(os.getenv("DISCORD_CLIENT_ID"))
+app.run(loop=loop)
