@@ -193,4 +193,12 @@ async def hello_world():
 loop.create_task(tele())
 loop.create_task(disc())
 
-loop.run_until_complete(serve(app, Config()))
+if os.getenv("ENV") == "prod":
+    port = os.getenv("PORT")
+    config = Config()
+    config.bind = ["0.0.0.0:" + port]
+
+    log.info(f"\n\nRunning on: {config.bind}\n\n")
+    loop.run_until_complete(serve(app, config))
+else:
+    loop.run_until_complete(serve(app, Config()))
