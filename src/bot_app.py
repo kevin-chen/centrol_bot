@@ -14,6 +14,8 @@ import discord
 import os
 import asyncio
 from aiogram import Bot, Dispatcher, types
+from hypercorn.asyncio import serve
+from hypercorn.config import Config
 
 loop = asyncio.get_event_loop()
 
@@ -191,4 +193,4 @@ async def hello_world():
 loop.create_task(tele())
 loop.create_task(disc())
 
-app.run(loop=loop)
+loop.run_until_complete(serve(app, Config()))
