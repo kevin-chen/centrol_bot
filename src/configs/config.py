@@ -17,7 +17,7 @@ class CentrolConfig:
     env = ENV.PROD if os.getenv("ENV") == "prod" else ENV.DEV
 
     def __init__(self):
-        secrets = secret.GoogleSecret()
+        # secrets = secret.GoogleSecret()
 
         if self.env == ENV.PROD:
             """
@@ -26,7 +26,7 @@ class CentrolConfig:
             self.DEBUG = False
             self.URL = "127.0.0.1"
             self.PORT = 8080
-            self.BOT_TOKEN = secrets.access_secret("BOT_SERVER_TOKEN")
+            # self.BOT_TOKEN = secrets.access_secret("BOT_SERVER_TOKEN")
         else:
             """
             Development configurations
