@@ -26,7 +26,7 @@ log = logging.getLogger(__name__)
 
 discord_client = discord.Client()
 tele_bot = Bot(
-    token=os.getenv("TELEGRAM_TOKEN"), parse_mode="MarkdownV2"
+    token=os.getenv("TELEGRAM_TOKEN"), parse_mode="Markdown"
 )  # can set the parse_mode to HTML or Markdown
 tele_dp = Dispatcher(tele_bot)
 DISC_TOKEN = os.getenv("DISCORD_CLIENT_ID")

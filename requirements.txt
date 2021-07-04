@@ -33,7 +33,7 @@ pyjokes==0.6.0
 pyTelegramBotAPI==3.8.1
 pytz==2021.1
 Quart==0.15.1
-regex==2021.4.4
+regex==2021.7.1
 requests==2.25.1
 toml==0.10.2
 typed-ast==1.4.3
@@ -42,4 +42,4 @@ urllib3==1.26.6
 Werkzeug==2.0.1
 wsproto==1.0.0
 yarl==1.6.3
-zipp==3.4.1
+zipp==3.5.0
