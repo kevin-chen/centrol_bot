@@ -9,7 +9,11 @@
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/src/bot_app.py",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
+            "env":{
+                "CENTROL_ENVIRONMENT": "dev",
+                "GOOGLE_APPLICATION_CREDENTIALS": "${workspaceFolder}/.env/centrol-server-service-account.json"
+            },
         }
     ]
 }
