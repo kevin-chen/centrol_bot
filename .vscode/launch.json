@@ -8,7 +8,7 @@
             "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/src/discord_bot.py",
+            "program": "${workspaceFolder}/src/bot_app.py",
             "console": "integratedTerminal"
         }
     ]
