@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 def get_latest_stock_price(sym: str):
     f_url = f"https://api.centrol.io/finance/stock/{sym}/quote"
     r = get(f_url)
-    if r is None:
+    if r is not None:
         if r == b"":
             return f"D'oh! {sym} not found 😱"
 
@@ -47,7 +47,7 @@ def get_latest_crypto_price(sym: str):
     f_url = f"https://api.centrol.io/finance/crypto/{sym}/quote"
     r = get(f_url)
 
-    if r is None:
+    if r is not None:
         if r == b"":
             return f"D'oh! {sym.upper()[:-3]} not found 😯"
 
@@ -70,7 +70,7 @@ Price: {p}
 def get_latest_iex_stock_price(sym: str):
     f_url = f"https://api.centrol.io/finance/tops/last?symbols={sym}"
     r = get(f_url)
-    if r is None:
+    if r is not None:
         if r == b"":
             return f"D'oh! {sym} not found 😱"
 
