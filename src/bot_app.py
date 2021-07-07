@@ -2,8 +2,12 @@ import asyncio
 from log import logger
 from configs.config import CentrolConfig
 from quart import Quart, render_template
+from moesifwsgi import MoesifMiddleware
 
 import logging
+
+moesif_settings = {'MOESIF_ID'}
+app.wsgi_app = MoesifMiddleware(app.wsgi_app, moesif_settings)
 
 logger.setup_logger()
 import os
