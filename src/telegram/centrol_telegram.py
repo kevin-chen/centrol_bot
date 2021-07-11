@@ -2,6 +2,7 @@ import os
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types
+from src.configs import user_messages as user_msgs
 
 from centrol.get_data import (
     get_latest_crypto_price,
@@ -47,24 +48,7 @@ class TelegramClient:
             This handler will be called when user sends `/start` or `/help` command
             """
             await message.reply(
-                """
-        Hello from the Centrol Trader Bot 👋
-
-        _To get stock data: _
-            ```
-            /s -> stock
-            /s AAPL```
-
-        _To get cryptocurrency data: _
-            ```
-            /c -> crypto
-            /c BTC```
-
-        By default we provide USD prices. To get data for EUR or GBP, simply add currency as a suffix. e.g. /c BTCEUR.
-
-        *Unfortunately at this time we can only provide price data for crypto tokens, we are looking to provide more data as we grow. *
-
-        If you have any suggestions or feature requests, add them here: https://share.centrol.io/e/feedback""",
+                user_msgs.HELP.format(op="/"),
             )
 
         # Decorated message handler - this only accepts one arg: the message.
