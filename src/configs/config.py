@@ -24,7 +24,7 @@ class CentrolConfig:
             self.DEBUG = False
             self.URL = "127.0.0.1"
             self.PORT = 8080
-            self.BOT_TOKEN = os.get_env("BOT_SERVER_TOKEN")
+            self.BOT_TOKEN = os.getenv("BOT_SERVER_TOKEN")
             self.SERVER_URL = "https://api.centrol.io"
         else:
             """
