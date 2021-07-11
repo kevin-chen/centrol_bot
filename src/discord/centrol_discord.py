@@ -1,4 +1,6 @@
 import logging
+from src.centrol.stocks import send_crypto_oder
+from configs import user_messages as user_msgs
 import discord
 import os
 from centrol.get_data import (
@@ -7,6 +9,9 @@ from centrol.get_data import (
 )
 import asyncio
 import pyjokes
+from centrol.user import CentrolUser
+from configs import user_messages as user_msgs
+from typing import Tuple
 
 log = logging.getLogger(__name__)
 
@@ -29,6 +34,8 @@ class DiscordClient:
 
     def __init__(self):
         log.info("Setting up discord client")
+        self.user = CentrolUser()
+
         self.client = discord.Client()
         self.loop = asyncio.get_event_loop()
 
@@ -48,58 +55,95 @@ class DiscordClient:
                 await message.channel.send("Hello!")
 
             if message.content.startswith("!help"):
-                await message.channel.send(
-                    f"""
-        Hello from the Centrol Trader Bot 👋
-
-        _To get stock data: _
-            ```
-            !s -> stock
-            !s AAPL
-            ```
-
-        _To get cryptocurrency data: _
-            ```
-            !c -> crypto
-            !c BTC
-            ```
-
-        By default we provide USD prices. To get data for EUR or GBP, simply add currency as a suffix. e.g. !c BTCEUR.
-
-        *Unfortunately at this time we can only provide price data for crypto tokens, we are looking to provide more data as we grow. *
-
-        If you have any suggestions or feature requests, add them here: https://share.centrol.io/e/feedback"""
-                )
+                await message.channel.send(user_msgs.HELP.format(op="!"))
 
             if message.content.startswith("!j"):
                 await message.channel.send(pyjokes.get_joke(category="neutral"))
 
+            # TODO: need to set up url for https://centrol.io/connect_alpaca <-- currently does not exist.
+            # if message.content.startswith("!buy"):
+            #    sym = "".join(message.content.split("!buy")).strip().lower()
+            #
+            #    success, msg = buy_stock(message)
+            #    if success:
+            #        return "Completed!"
+            #    else:
+            #        await message.author.send(msg)
+
+            # !buy crypto btc 0.00001
+            if message.content.startswith("!buy crypto mkt"):
+                data = "".join(message.content.split("!buy crypto mkt")).strip().upper()
+                try:
+                    crypto_pair, amount = data.split(" ")
+                except:
+                    return await message.author.send(
+                        user_msgs.EXAMPLE_BUY_ORDER.format(op="!")
+                    )
+
+                success, msg = await self.buy_crypto(
+                    message, crypto_pair, amount, "buy-mkt"
+                )
+
+                return await message.author.send(msg)
+
+            # !buy crypto btc 0.00001
+            if message.content.startswith("!sell crypto mkt"):
+                data = (
+                    "".join(message.content.split("!sell crypto mkt")).strip().upper()
+                )
+                try:
+                    crypto_pair, amount = data.split(" ")
+                except:
+                    return await message.author.send(
+                        user_msgs.EXAMPLE_SELL_ORDER.format(op="!")
+                    )
+
+                success, msg = await self.buy_crypto(
+                    message, crypto_pair, amount, "sell-mkt"
+                )
+
+                return await message.author.send(msg)
+
+            if message.content.startswith("!add-token coinbase"):
+                data = "".join(message.content.split("!add-token coinbase")).strip()
+                try:
+                    token, passphrase, secret = data.split(" ")
+                except:
+                    return await message.author.send(
+                        user_msgs.FAILED_TOKEN_ADD.format(op="!")
+                    )
+                success = self.user.add_coinbase_token(
+                    str(message.author.id), token, passphrase, secret, "sandbox"
+                )
+
+                if success:
+                    return await message.author.send("Added token successully")
+                else:
+                    return await message.author.send("Failed to add token")
+
             if message.content.startswith("!s"):
                 sym = "".join(message.content.split("!s")).strip().upper()
                 data = get_latest_stock_price(sym)
-                await message.channel.send(data)
+                return await message.channel.send(data)
 
             if message.content.startswith("!c"):
                 sym = "".join(message.content.split("!c")).strip().lower()
                 data = get_latest_crypto_price(sym)
-                await message.channel.send(data)
+                return await message.channel.send(data)
 
-            # TODO: need to set up url for https://centrol.io/connect_alpaca <-- currently does not exist.
-            if message.content.startswith("!buy"):
-                sym = "".join(message.content.split("!buy")).strip().lower()
-                await message.author.send(
-                    f"""
-        Hi!
+    async def buy_crypto(self, message, crypto_pair, price, typ) -> Tuple[bool, str]:
+        if not self.user.check_user(message.author.id):
+            self.user.create_user("", message.author.id, message.author.name, "discord")
 
-        You just tried to buy a stock with the Centrol Trading bot. To process this we need to first connect with an Alpaca account.
+        resp = send_crypto_oder(
+            message.author.id, crypto_pair, price, typ, "sandbox", "discord"
+        )
+        if resp["msg"] == "TOKEN_MISSING":
+            return False, user_msgs.COINBASE_CONNECT.format(op="!")
 
-        1. If you don't have a Alpaca account, first create one using the link below.
-        https://alpaca.markets/algotrading
+        if resp["flag"] == True:
+            return True, user_msgs.SUCCESSFUL_ORDER.format(
+                url="https://public.sandbox.pro.coinbase.com/orders"
+            )
 
-        2. You can then either fund your account or using a virtual account (paper trading) to try out the bot!
-
-        3. Connect your Alpaca account using the below link:
-        https://centrol.io/connect_alpaca
-
-        """
-                )
+        return False, resp["msg"]
