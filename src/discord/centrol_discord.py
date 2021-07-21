@@ -1,5 +1,5 @@
 import logging
-from src.centrol.stocks import send_crypto_oder
+from src.centrol.stocks import send_crypto_order
 from configs import user_messages as user_msgs
 import discord
 import os
@@ -135,7 +135,7 @@ class DiscordClient:
         if not self.user.check_user(message.author.id):
             self.user.create_user("", message.author.id, message.author.name, "discord")
 
-        resp = send_crypto_oder(
+        resp = send_crypto_order(
             message.author.id, crypto_pair, price, typ, "sandbox", "discord"
         )
         if resp["msg"] == "TOKEN_MISSING":

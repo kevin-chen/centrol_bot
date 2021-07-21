@@ -19,7 +19,7 @@ def buy_stock(message) -> Tuple[bool, str]:
     return False, user_msgs.ALPACA_CONNECT
 
 
-def send_crypto_oder(user_id, crypto_pair, price, typ, account_typ, src):
+def send_crypto_order(user_id, crypto_pair, price, typ, account_typ, src):
     data = {
         "id": str(user_id),
         "account_typ": account_typ,
