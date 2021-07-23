@@ -131,7 +131,8 @@ class DiscordClient:
                 chart = discord.Embed()
                 chart.set_ImageURL(get_stock_chart(sym))
                 
-                return await message.channel.send(data, chart)
+                return await message.channel.send(data)
+                return await message.channel.send(chart)
 
             # Crypto Price Request
             if message.content.startswith("!c"):
@@ -141,7 +142,8 @@ class DiscordClient:
                 chart = discord.Embed()
                 chart.set_ImageURL(get_crypto_chart(sym))
                 
-                return await message.channel.send(data, chart)
+                return await message.channel.send(data)
+                return await message.channel.send(chart)
                 
 
     async def buy_crypto(self, message, crypto_pair, price, typ) -> Tuple[bool, str]:
