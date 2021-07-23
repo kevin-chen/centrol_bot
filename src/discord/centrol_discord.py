@@ -129,7 +129,7 @@ class DiscordClient:
                 data = get_latest_stock_price(sym)
                 
                 c = discord.Embed()
-                chart = c.set_ImageURL(get_stock_chart(sym))
+                chart = c.set_image(get_stock_chart(sym))
                 
                 return await message.channel.send(data)
                 return await message.channel.send(chart)
@@ -140,7 +140,7 @@ class DiscordClient:
                 data = get_latest_crypto_price(sym)
                 
                 c = discord.Embed()
-                chart = c.set_ImageURL(get_crypto_chart(sym))
+                chart = c.set_image(get_crypto_chart(sym))
                 
                 return await message.channel.send(data)
                 return await message.channel.send(chart)
