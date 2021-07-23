@@ -128,8 +128,8 @@ class DiscordClient:
                 sym = "".join(message.content.split("!s")).strip().upper()
                 data = get_latest_stock_price(sym)
                 
-                chart = discord.Embed()
-                chart.set_ImageURL(get_stock_chart(sym))
+                c = discord.Embed()
+                chart = c.set_ImageURL(get_stock_chart(sym))
                 
                 return await message.channel.send(data)
                 return await message.channel.send(chart)
@@ -139,8 +139,8 @@ class DiscordClient:
                 sym = "".join(message.content.split("!c")).strip().lower()
                 data = get_latest_crypto_price(sym)
                 
-                chart = discord.Embed()
-                chart.set_ImageURL(get_crypto_chart(sym))
+                c = discord.Embed()
+                chart = c.set_ImageURL(get_crypto_chart(sym))
                 
                 return await message.channel.send(data)
                 return await message.channel.send(chart)
