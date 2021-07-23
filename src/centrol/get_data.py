@@ -1,6 +1,7 @@
 import requests
 import logging
 import json
+import random
 from utils.make_request import get
 
 log = logging.getLogger(__name__)
@@ -30,6 +31,9 @@ Average 30-day volume: {data["avgTotalVolume"]:,}
 52-week High: {data["week52High"]:,}
 52-week Low: {data["week52Low"]:,}
 ```
+
+https://elite.finviz.com/chart.ashx?t={data["symbol"]}&ty=c&ta=st_c,sch_200p,rsi_b_14,macd_b_12_26_9,sma_50,sma_200,sma_20&p=d&s=lx=${random.uniform(0,1)}.png
+
 """
         return resp
     else:
@@ -59,33 +63,12 @@ def get_latest_crypto_price(sym: str):
 
 Price: {p}
 ```
+
+https://elite.finviz.com/fx_image.ashx?{data["symbol"]}_m5_l.png
+
+
 """
         return resp
     else:
         log.error(f"Faild to get: {sym}")
-        return "This is embarrassing. We are having server issues."
-
-
-# this does not appear to work yet - IEX is returning all stock data prices from deep instead of specific security
-def get_latest_iex_stock_price(sym: str):
-    f_url = f"https://api.centrol.io/finance/tops/last?symbols={sym}"
-    r = get(f_url)
-    if r is not None:
-        if r == b"":
-            return f"D'oh! {sym} not found 😱"
-
-        data = json.loads(r)
-        p = ("%.5f" % float(data["price"])).rstrip("0").rstrip(".")
-        resp = f"""
-```yaml
-{data["symbol"]}
-
-Price: {p}
-
-Volume: {data["size"]}
-```
-"""
-        return resp
-    else:
-        log.error(f"Failed to get: {sym}")
         return "This is embarrassing. We are having server issues."
