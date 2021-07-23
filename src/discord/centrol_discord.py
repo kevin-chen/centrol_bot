@@ -6,6 +6,8 @@ import os
 from centrol.get_data import (
     get_latest_crypto_price,
     get_latest_stock_price,
+    get_stock_chart,
+    get_crypto_chart,
 )
 import asyncio
 import pyjokes
@@ -121,15 +123,26 @@ class DiscordClient:
                 else:
                     return await message.author.send("Failed to add token")
 
+            # Stock Price Request
             if message.content.startswith("!s"):
                 sym = "".join(message.content.split("!s")).strip().upper()
                 data = get_latest_stock_price(sym)
-                return await message.channel.send(data)
+                
+                chart = discord.Embed()
+                chart.set_ImageURL(get_stock_chart(sym))
+                
+                return await message.channel.send(data, chart)
 
+            # Crypto Price Request
             if message.content.startswith("!c"):
                 sym = "".join(message.content.split("!c")).strip().lower()
                 data = get_latest_crypto_price(sym)
-                return await message.channel.send(data)
+                
+                chart = discord.Embed()
+                chart.set_ImageURL(get_crypto_chart(sym))
+                
+                return await message.channel.send(data, chart)
+                
 
     async def buy_crypto(self, message, crypto_pair, price, typ) -> Tuple[bool, str]:
         if not self.user.check_user(message.author.id):

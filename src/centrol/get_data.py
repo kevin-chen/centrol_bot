@@ -17,7 +17,6 @@ def get_latest_stock_price(sym: str):
         data = json.loads(r)
         percent_change = "{:.3f} %".format(100 * (data["changePercent"]))
         data["percent_change"] = percent_change
-
         resp = f"""
 ```yaml
 {data["symbol"]} {data["companyName"]}
@@ -31,15 +30,24 @@ Average 30-day volume: {data["avgTotalVolume"]:,}
 52-week High: {data["week52High"]:,}
 52-week Low: {data["week52Low"]:,}
 ```
-
-https://elite.finviz.com/chart.ashx?t={data["symbol"]}&ty=c&ta=st_c,sch_200p,rsi_b_14,macd_b_12_26_9,sma_50,sma_200,sma_20&p=d&s=lx=${random.uniform(0,1)}.png
-
 """
         return resp
+
     else:
         log.error(f"Failed to get: {sym}")
         return "This is embarrassing. We are having server issues."
 
+# Stock Chart pull
+def get_stock_chart(sym: str):
+    chart = f"https://elite.finviz.com/chart.ashx?t={sym}&ty=c&ta=st_c,sch_200p,rsi_b_14,macd_b_12_26_9,sma_50,sma_200,sma_20&p=d&s=lx=${random.uniform(0,1)}.png"
+    return chart
+
+# Crypto Chart pull
+def get_crypto_chart(sym: str):
+    if not sym[-3:] in ["usd", "gbp", "eur"]:
+        sym += "usd"
+        chart = f"https://elite.finviz.com/fx_image.ashx?{sym}_m5_l.png"
+    return chart
 
 # Crypto price provided from IEX Crypto Quote call
 # TODO: [CENTROL-13] considering the use of CoinGecko for this instead of IEX so that we can get more information instead of just price for a handful of crypto's
@@ -63,10 +71,6 @@ def get_latest_crypto_price(sym: str):
 
 Price: {p}
 ```
-
-https://elite.finviz.com/fx_image.ashx?{data["symbol"]}_m5_l.png
-
-
 """
         return resp
     else:
