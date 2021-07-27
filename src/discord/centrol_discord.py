@@ -147,8 +147,7 @@ class DiscordClient:
                     color = 0x0050c7,)
                 chart = embed.set_image(url = get_stock_chart(sym))
                 
-                return await message.channel.send(data)
-                return await message.channel.send(embed = chart)
+                return await message.channel.send(data), message.channel.send(embed = chart)
                 
 
     async def buy_crypto(self, message, crypto_pair, price, typ) -> Tuple[bool, str]:
