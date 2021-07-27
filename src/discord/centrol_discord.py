@@ -152,8 +152,8 @@ class DiscordClient:
                 return await data
 
             # Crypto Chart Request
-            if message.content.startswith("!cc "):
-                sym = "".join(message.content.split("!cc")).strip().lower()
+            if message.content.startswith("!x "):
+                sym = "".join(message.content.split("!x")).strip().lower()
                 embed = discord.Embed(
                     title = "Price Chart", 
                     color = 0x0050c7,)
