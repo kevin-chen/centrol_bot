@@ -138,7 +138,7 @@ class DiscordClient:
                 # return await message.channel.send(embed = chart)
 
             # Crypto Price Request
-            if message.content.startswith("!c"):
+            if message.content.startswith("!c "):
                 sym = "".join(message.content.split("!c")).strip().lower()
                 data_fx = get_latest_crypto_price(sym)
                 data = message.channel.send(data_fx)
@@ -152,7 +152,7 @@ class DiscordClient:
                 return await data
 
             # Crypto Chart Request
-            if message.content.startswith("!cc"):
+            if message.content.startswith("!cc "):
                 sym = "".join(message.content.split("!cc")).strip().lower()
                 embed = discord.Embed(
                     title = "Price Chart", 
