@@ -153,7 +153,7 @@ class DiscordClient:
 
             # Crypto Chart Request
             if message.content.startswith("!cc"):
-                sym = "".join(message.content.split("!c")).strip().lower()
+                sym = "".join(message.content.split("!cc")).strip().lower()
                 embed = discord.Embed(
                     title = "Price Chart", 
                     color = 0x0050c7,)
