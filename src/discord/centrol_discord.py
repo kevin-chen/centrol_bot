@@ -149,7 +149,17 @@ class DiscordClient:
                 chart_fx = embed.set_image(url = get_stock_chart(sym))
                 chart = message.channel.send(embed = chart_fx)
 
-                return await data, chart
+                return await data
+
+            # Crypto Chart Request
+            if message.content.startswith("!cc"):
+                sym = "".join(message.content.split("!c")).strip().lower()
+                embed = discord.Embed(
+                    title = "Price Chart", 
+                    color = 0x0050c7,)
+                chart = embed.set_image(url = get_stock_chart(sym))
+
+                return await message.channel.send(embed = chart)
                 
 
     async def buy_crypto(self, message, crypto_pair, price, typ) -> Tuple[bool, str]:
