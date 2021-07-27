@@ -140,14 +140,16 @@ class DiscordClient:
             # Crypto Price Request
             if message.content.startswith("!c"):
                 sym = "".join(message.content.split("!c")).strip().lower()
-                data = get_latest_crypto_price(sym)
-                
+                data_fx = get_latest_crypto_price(sym)
+                data = message.channel.send(data_fx)
+
                 embed = discord.Embed(
                     title = "Price Chart", 
                     color = 0x0050c7,)
-                chart = embed.set_image(url = get_stock_chart(sym))
-                
-                return await message.channel.send(data), message.channel.send(embed = chart)
+                chart_fx = embed.set_image(url = get_stock_chart(sym))
+                chart = message.channel.send(embed = chart_fx)
+
+                return await data, chart
                 
 
     async def buy_crypto(self, message, crypto_pair, price, typ) -> Tuple[bool, str]:
