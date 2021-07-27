@@ -124,40 +124,36 @@ class DiscordClient:
                     return await message.author.send("Failed to add token")
 
             # Stock Price Request
-            if message.content.startswith("!s"):
+            if message.content.startswith("!s "):
                 sym = "".join(message.content.split("!s")).strip().upper()
                 data = get_latest_stock_price(sym)
                 
-                # embed = discord.Embed(
-                #     title = "Price Chart", 
-                #     color = 0x0050c7,)
-                # embed.set_footer(name = "Chart provided by Finviz, powered by Centrol")
-                # chart = embed.set_image(get_stock_chart(sym))
-                
                 return await message.channel.send(data)
-                # return await message.channel.send(embed = chart)
 
+            # Stock Chart Request
+            if message.content.startswith("!sc "):
+                sym = "".join(message.content.split("!sc")).strip().lower()
+                embed = discord.Embed(
+                    title = "Stock Price Chart", 
+                    color = 0x0050c7,)
+                chart = embed.set_image(url = get_stock_chart(sym))
+
+                return await message.channel.send(embed = chart)
+            
             # Crypto Price Request
             if message.content.startswith("!c "):
                 sym = "".join(message.content.split("!c")).strip().lower()
-                data_fx = get_latest_crypto_price(sym)
-                data = message.channel.send(data_fx)
+                data = get_latest_crypto_price(sym)
 
-                embed = discord.Embed(
-                    title = "Price Chart", 
-                    color = 0x0050c7,)
-                chart_fx = embed.set_image(url = get_stock_chart(sym))
-                chart = message.channel.send(embed = chart_fx)
-
-                return await data
+                return await message.channel.send(data)
 
             # Crypto Chart Request
-            if message.content.startswith("!x "):
-                sym = "".join(message.content.split("!x")).strip().lower()
+            if message.content.startswith("!cc "):
+                sym = "".join(message.content.split("!cc")).strip().lower()
                 embed = discord.Embed(
                     title = "Price Chart", 
                     color = 0x0050c7,)
-                chart = embed.set_image(url = get_stock_chart(sym))
+                chart = embed.set_image(url = get_crypto_chart(sym))
 
                 return await message.channel.send(embed = chart)
                 
