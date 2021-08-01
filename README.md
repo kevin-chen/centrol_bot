@@ -1,6 +1,5 @@
 # Centrol bot for querying Stock and Crypto data
 
-
 ## Invite links for Chat Bots! 
 
 👇 Click the respective logo of the app bot you want 
