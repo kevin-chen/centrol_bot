@@ -1,7 +1,7 @@
 import asyncio
 from log import logger
 from configs.config import CentrolConfig
-from quart import Quart, render_template
+from quart import Quart, render_template, jsonify
 
 import logging
 
@@ -28,6 +28,11 @@ telegram = TelegramClient()
 @app.route("/")
 async def hello_world():
     return await render_template("index.html")
+
+
+@app.route("/discord/get_guilds")
+async def get_discord_guilds():
+    return jsonify([i.name for i in discord.client.guilds])
 
 
 # loop.create_task(app.run_task())
