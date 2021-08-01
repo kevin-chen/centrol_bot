@@ -37,17 +37,25 @@ Average 30-day volume: {data["avgTotalVolume"]:,}
         log.error(f"Failed to get: {sym}")
         return "This is embarrassing. We are having server issues."
 
+
 # Stock Chart pull
 def get_stock_chart(sym: str):
-    chart = f"https://elite.finviz.com/chart.ashx?t={sym}&ty=c&ta=st_c,sch_200p,rsi_b_14,macd_b_12_26_9,sma_50,sma_200,sma_20&p=d&s=lx=${random.uniform(0,1)}.png"
-    return chart
+    chart = f"https://api.centrol.io/finance/get_chart?sym={sym}&typ=stock"
+    r = get(chart)
+
+    return json.loads(r)
+
 
 # Crypto Chart pull
 def get_crypto_chart(sym: str):
     if not sym[-3:] in ["usd", "gbp", "eur"]:
         sym += "usd"
-        chart = f"https://elite.finviz.com/fx_image.ashx?{sym}_m5_l.png"
-    return chart
+
+    chart = f"https://api.centrol.io/finance/get_chart?sym={sym}&typ=crypto"
+    r = get(chart)
+
+    return json.loads(r)
+
 
 # Crypto price provided from IEX Crypto Quote call
 # TODO: [CENTROL-13] considering the use of CoinGecko for this instead of IEX so that we can get more information instead of just price for a handful of crypto's
