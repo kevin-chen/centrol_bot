@@ -1,4 +1,4 @@
-from src.configs.config import CentrolConfig
+from configs.config import CentrolConfig
 import requests
 import logging
 from typing import Optional, Dict, Any

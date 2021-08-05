@@ -1,5 +1,5 @@
 import logging
-from src.centrol.stocks import send_crypto_order
+from centrol.stocks import send_crypto_order
 from configs import user_messages as user_msgs
 import discord
 import os

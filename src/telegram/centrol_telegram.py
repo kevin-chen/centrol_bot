@@ -2,7 +2,8 @@ import os
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher, types
-from src.configs import user_messages as user_msgs
+from configs import user_messages as user_msgs
+from dotenv import load_dotenv
 
 from centrol.get_data import (
     get_latest_crypto_price,
@@ -12,6 +13,7 @@ import pyjokes
 
 log = logging.getLogger(__name__)
 
+load_dotenv()
 
 class TelegramClient:
     async def connect(self):
@@ -72,3 +74,6 @@ class TelegramClient:
                 sym = "".join(message.text.split("/iprice")).strip().lower()
                 data = get_latest_iex_stock_price(sym)
                 await message.reply(data)
+
+            if message.text.startswith("!buy crypto mkt"):
+                
