@@ -11,6 +11,10 @@ from centrol.get_data import (
 )
 import pyjokes
 
+from centrol.stocks import send_crypto_order
+from typing import Tuple
+from centrol.user import CentrolUser
+
 log = logging.getLogger(__name__)
 
 load_dotenv()
@@ -35,6 +39,7 @@ class TelegramClient:
 
     def __init__(self):
         log.info("Setting up telegram client")
+        self.user = CentrolUser()
 
         self.loop = asyncio.get_event_loop()
         token = os.getenv("TELEGRAM_TOKEN")
@@ -75,5 +80,66 @@ class TelegramClient:
                 data = get_latest_iex_stock_price(sym)
                 await message.reply(data)
 
-            if message.text.startswith("!buy crypto mkt"):
-                
+            if message.text.startswith("/buy crypto mkt"):
+                data = "".join(message.content.split("/buy crypto mkt")).strip().upper()
+                try:
+                    crypto_pair, amount = data.split(" ")
+                except:
+                    return await message.reply(user_msgs.EXAMPLE_BUY_ORDER.format(op="!"))
+
+                success, msg = await self.buy_crypto(
+                    message, crypto_pair, amount, "buy-mkt"
+                )
+
+                return await message.reply(msg)
+
+            if message.text.startswith("/sell crypto mkt"):
+                data = (
+                    "".join(message.content.split("/sell crypto mkt")).strip().upper()
+                )
+                try:
+                    crypto_pair, amount = data.split(" ")
+                except:
+                    return await message.reply(
+                        user_msgs.EXAMPLE_SELL_ORDER.format(op="!")
+                    )
+
+                success, msg = await self.buy_crypto(
+                    message, crypto_pair, amount, "sell-mkt"
+                )
+
+                return await message.reply(msg)
+
+            if message.text.startswith("/add-token coinbase"):
+                data = "".join(message.content.split("/add-token coinbase")).strip()
+                try:
+                    token, passphrase, secret = data.split(" ")
+                except:
+                    return await message.reply(
+                        user_msgs.FAILED_TOKEN_ADD.format(op="!")
+                    )
+                success = self.user.add_coinbase_token(
+                    str(message.author.id), token, passphrase, secret, "sandbox"
+                )
+
+                if success:
+                    return await message.reply("Added token successully")
+                else:
+                    return await message.reply("Failed to add token")
+        
+    async def buy_crypto(self, message, crypto_pair, price, typ) -> Tuple[bool, str]:
+        if not self.user.check_user(message.author.id):
+            self.user.create_user("", message.author.id, message.author.name, "discord")
+
+        resp = send_crypto_order(
+            message.author.id, crypto_pair, price, typ, "sandbox", "discord"
+        )
+        if resp["msg"] == "TOKEN_MISSING":
+            return False, user_msgs.COINBASE_CONNECT.format(op="!")
+
+        if resp["flag"] == True:
+            return True, user_msgs.SUCCESSFUL_ORDER.format(
+                url="https://public.sandbox.pro.coinbase.com/orders"
+            )
+
+        return False, resp["msg"]
